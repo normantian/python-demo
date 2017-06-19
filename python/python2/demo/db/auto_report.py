@@ -23,10 +23,11 @@ sys.stdin,sys.stdout,sys.stderr=stdi,stdo,stde
 def query_data(file_name, db_url):
     print( '==' *30)
     db = records.Database(db_url)
-    rows = db.query_file('sql/query.sql')
+    rows = db.query_file(os.path.dirname(os.path.realpath(__file__)) + '/sql/query.sql')
     with open(file_name, 'wb',) as f:
         f.write(rows.export('xls'))
-    print(rows.dataset)
+    # print(rows.dataset)
+    print("query data success!") 
     db.close()
 
 '''
@@ -37,9 +38,10 @@ def check_dir(dst_path):
         os.mkdir(dst_path)
 
 def send_mail(email_config, attachment_path):
-    print email_config.get('smtp')
-    print email_config.get('email_address')
-    print email_config.get('password')
+    # print email_config.get('smtp')
+    # print email_config.get('email_address')
+    #print email_config.get('password')
+    print("Init SMTP server successfully. server=%s, email_address=%s."%(email_config.get('smtp'), email_config.get('email_address')))
 
     msg = MIMEMultipart()  
     msg["Subject"] = email_config.get('title')
@@ -70,15 +72,15 @@ def send_mail(email_config, attachment_path):
     sent.login(email_config.get('email_address'),email_config.get('password'))
     sent.sendmail(email_config.get('email_address'), to_addrs, msg.as_string())
     sent.quit()
-    print 'send finish'
+    print('send finish at %s' %(time.strftime("%Y%m%d %H:%M:%S", time.localtime())))
 
 
 def main():
     dest_path = os.getcwd()+"/report"
     check_dir(dest_path)
-    file_name = ''.join(('./report/',time.strftime("%Y%m%d%H%M%S", time.localtime()),'.xls'))
+    file_name = ''.join((dest_path, '/',time.strftime("%Y%m%d%H%M%S", time.localtime()),'.xls'))
     config = ConfigParser.ConfigParser()
-    config.readfp(open("./config/config.conf", "rb"))
+    config.readfp(open(os.path.dirname(os.path.realpath(__file__)) + "/config/config.conf", "rb"))
     db_url = config.get('db','url')
     query_data(file_name, db_url)
     send_mail(dict(config.items('email')), file_name)
