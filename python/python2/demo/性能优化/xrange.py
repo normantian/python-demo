@@ -1,5 +1,4 @@
 '''
-优化循环
 total run time:
 115.562999964
 '''
@@ -15,7 +14,6 @@ print "total run time:"
 print time()-t
 
 '''
-优化后 使用xrange
 total run time:
 82.2209999561
 '''

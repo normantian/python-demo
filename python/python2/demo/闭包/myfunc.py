@@ -20,6 +20,8 @@ def my_sum(*arg):
             return 0
     '''
     return sum(arg)
+
+@dec
 def my_avg(*arg):
     '''
     if len(arg) == 0:
@@ -34,6 +36,9 @@ def my_avg(*arg):
 #dec return  in_dec -> my_sum
 print my_sum(1,2,3,4)
 print my_avg(1,2,3,4)
+
+
+print my_avg(1,2,3,[2,3,4],'13',4)
 '''
 my_sum = dec(my_sum)
 my_avg = dec(my_avg)

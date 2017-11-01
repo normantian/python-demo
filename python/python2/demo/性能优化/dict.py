@@ -3,7 +3,7 @@ t = time()
 list = ['a','b','is','python','jason','hello','hill','with','phone','test',
 'dfdf','apple','pddf','ind','basic','none','baecr','var','bana','dd','wrd']
 list = dict.fromkeys(list,True)
-#È¥µô×¢ÊÍ£¬Ğ§ÂÊÌá¸ßÒ»±¶
+#å»æ‰æ³¨é‡Šï¼Œæ•ˆç‡æé«˜ä¸€å€
 print list
 filter = []
 for i in range (1000000):

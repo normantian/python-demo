@@ -16,6 +16,7 @@ def func_100(val):
         print 'pass'
     else:
         print 'failed'
+
 def func_150(val):
     passline = 90
     if val >= passline:

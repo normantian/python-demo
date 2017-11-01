@@ -1,6 +1,6 @@
 '''
-×Ö·û´®ÓÅ»¯
-Ê¹ÓÃjoin ²»ÒªÊ¹ÓÃ+=
+å­—ç¬¦ä¸²ä¼˜åŒ–
+ä½¿ç”¨join ä¸è¦ä½¿ç”¨+=
 
 from time import time
 
@@ -15,7 +15,7 @@ print "total run time:"
 print time()-t
 '''
 '''
-ÓÅ»¯ºó
+ä¼˜åŒ–å
 '''
 from time import time
 t = time()
@@ -27,11 +27,11 @@ for i in range (10000):
 print "total run time:"
 print time()-t
 
-#½¨Òé¸ñÊ½»¯×Ö·û´®
+#Â½Â¨Ã’Ã©Â¸Ã±ÃŠÂ½Â»Â¯Ã—Ã–Â·Ã»Â´Â®
 out = "<html>%s%s%s%s</html>" % (head, prologue, query, tail)
 
 
-#±ÜÃâ
+#Â±ÃœÃƒÃ¢
 out = "<html>" + head + prologue + query + tail + "</html>"
 
-#Èç¹ûĞèÒª½»»»Á½¸ö±äÁ¿µÄÖµÊ¹ÓÃ a,b=b,a ¶ø²»ÊÇ½èÖúÖĞ¼ä±äÁ¿ t=a;a=b;b=t£»
+#ÃˆÃ§Â¹Ã»ÃÃ¨Ã’ÂªÂ½Â»Â»Â»ÃÂ½Â¸Ã¶Â±Ã¤ÃÂ¿ÂµÃ„Ã–ÂµÃŠÂ¹Ã“Ãƒ a,b=b,a Â¶Ã¸Â²Â»ÃŠÃ‡Â½Ã¨Ã–ÃºÃ–ÃÂ¼Ã¤Â±Ã¤ÃÂ¿ t=a;a=b;b=tÂ£Â»

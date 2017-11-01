@@ -62,7 +62,7 @@ class EmailSender(object):
         @param user:     the user name of the email sender. 
         @param password: the passord of the user for login to SMTP server. 
         '''  
-        self.from_addr = user + "@" + ".".join(self.server.split(".")[1:])  
+        self.from_addr = user #user + "@" + ".".join(self.server.split(".")[1:])  
         try:  
             self.print_verbose("Start to login into SMTP server.server=%s, port=%d."%(self.server, self.port))  
             self.smtp.login(user, password)  
@@ -90,7 +90,8 @@ class EmailSender(object):
             attach = MIMEBase("application", "octet-stream")  
             attach.set_payload(open(filename, "rb").read())  
             #attach.add_header("Content-Disposition", "attachment;filename=%s"%(basename))  
-            attach.add_header("Content-Disposition", "attachment", filename=(encoding, "", basename))  
+            #attach.add_header("Content-Disposition", "attachment", filename=(encoding, "", basename))
+            attach.add_header("Content-Disposition", "attachment", filename=basename)  
             Encoders.encode_base64(attach)  
             self.attachments.append(attach)  
             self.print_verbose("Add attachment \"%s\" successfully."%(filename))  
@@ -178,20 +179,24 @@ def check_dir(dst_path):
 def query_data(file_name, db_url):
     print( '==' *30)
     db = records.Database(db_url)
-    rows = db.query_file('sql/query.sql')
+    rows = db.query_file(os.path.dirname(os.path.realpath(__file__)) + '/sql/query.sql')
     with open(file_name, 'wb',) as f:
         f.write(rows.export('xls'))
     print(rows.dataset)
     db.close()
 
-def test():
+def create_excel(file_name, db_url):
     dest_path = os.getcwd()+"/report"
     check_dir(dest_path)
+    query_data(file_name, db_url)
+
+def test():
+    
     file_name = ''.join(('./report/',time.strftime("%Y%m%d%H%M%S", time.localtime()),'.xls'))
     config = ConfigParser.ConfigParser()
-    config.readfp(open("./config/config.conf", "rb"))
+    config.readfp(open(os.path.dirname(os.path.realpath(__file__)) + "/config/config.conf", "rb"))
     db_url = config.get('db','url')
-    query_data(file_name, db_url)
+    create_excel(file_name, db_url)
 
     smtp_server = config.get('email','smtp')  
     user = config.get('email','email_address')
